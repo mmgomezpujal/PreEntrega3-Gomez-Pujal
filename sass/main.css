@@ -1,0 +1,93 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.p-color, .card {
+  background-color: #012169;
+  color: #f4f4f4;
+  border: #012169;
+}
+
+.nav-link {
+  color: white;
+  font-weight: bold;
+}
+
+.texto-resaltado {
+  font-style: italic;
+  font-size: large;
+}
+
+main div .col-md-7 {
+  text-align: justify;
+}
+
+.card {
+  color: white;
+}
+
+.card-h img:hover {
+  opacity: 0.5;
+}
+
+.s-color {
+  background-color: #f4f4f4;
+  color: black;
+}
+
+.s-color-nov {
+  background-color: white;
+  color: #012169;
+}
+
+footer ul li {
+  list-style-type: none;
+  text-align: left;
+}
+footer ul li a {
+  text-decoration: none;
+}
+
+div ul li {
+  list-style-type: none;
+}
+
+.parallax {
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 480px;
+  position: relative;
+  opacity: 0.7;
+}
+
+.img-2 {
+  background-image: url(../assets/img/img-2.jpg);
+}
+
+.img-3 {
+  background-image: url(../assets/img/img-3.jpg);
+}
+
+.img-4 {
+  background-image: url(../assets/img/img-4.jpg);
+}
+
+.img-5 {
+  background-image: url(../assets/img/img-5.jpg);
+}
+
+.title-parallax {
+  color: white;
+  line-height: 480px;
+  padding: 0 0 0 10px;
+}
+
+@media screen and (max-width: 765px) {
+  .dsp-none {
+    display: none;
+  }
+}/*# sourceMappingURL=main.css.map */

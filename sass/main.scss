@@ -1,0 +1,107 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+$primary-color: #012169;
+$secondary-color: #f4f4f4;
+$tertiary-color: white;
+$std-color: black;
+
+.p-color {
+    background-color: $primary-color;
+    color: $secondary-color;
+    border: $primary-color;
+}
+
+.nav-link {
+    color: $tertiary-color;
+    font-weight: bold;
+}
+
+.texto-resaltado { 
+    font-style: italic;
+    font-size: large;
+}
+
+main{
+    div{
+        .col-md-7{
+            text-align: justify;
+        }
+    }
+}
+
+.card {
+    @extend .p-color;
+    color: $tertiary-color;
+}
+
+.card-h{
+    img{
+        &:hover{
+            opacity: 0.5;
+        }
+    }
+}
+
+.s-color {
+    background-color: $secondary-color;
+    color: $std-color;
+}
+
+.s-color-nov {
+    background-color: $tertiary-color;
+    color: $primary-color;
+}
+
+footer {
+    ul {
+        li{
+            list-style-type: none;
+            text-align: left;
+            a {text-decoration: none;
+            }
+        }
+    }
+}
+
+div {
+    ul {
+        li {
+            list-style-type: none;
+        }
+    }
+}
+
+.parallax {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 480px;
+    position: relative;
+    opacity: 0.7;
+}
+
+@for $i from 2 through 5 {
+    .img-#{$i}{
+        background-image: url(../assets/img/img-#{$i});
+    }
+}
+
+.title-parallax{
+    color:$tertiary-color;
+    line-height: 480px;
+    padding: 0 0 0 10px;
+}
+
+@media screen and (max-width:765px) {
+    .dsp-none{
+        display: none;
+    }
+}
+
+
+
