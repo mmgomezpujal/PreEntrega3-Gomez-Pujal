@@ -13,6 +13,18 @@ const productos = [
     {nombre: "biocida", id: "id42", presentacion: "tambor", precio: 2.10 * 1.20 * 200},
     {nombre: "biocida", id: "id43", presentacion: "balde/bidón", precio: 2.10 * 1.40 * 20}];
 
+// DEFINO LA FUNCIÓN QUE BUSCARA EL PRODUCTO X ID
+
+    function buscarProducto() {
+
+    let buscar = prompt("Ingrese el id del producto que desea buscar: ");
+    
+    const busqueda = productos.find((producto) => producto.id == buscar);
+    
+    console.log(busqueda);
+    
+}
+
 // DEFINO LA FUNCIÓN QUE SERÁ LLAMADA DESDE HTML A TRAVÉS DEL SCRIPT
 
 function calcularPrecio() {
@@ -44,6 +56,10 @@ function calcularPrecio() {
         alert("¡Gracias por la visita!");
     }
 }
+
+
+
+
 
 // -------------------------------------Primer PreEntrega---------------------------------------------------
 
