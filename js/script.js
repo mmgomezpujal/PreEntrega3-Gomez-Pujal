@@ -10,7 +10,7 @@ const ultimaCompra = document.getElementById('ultimaCompra');
 
 const url = '\stock.json';
 
-//Cargo el stock de mis productos desde el archivo .json
+// Cargo el stock de mis productos desde el archivo .json
 
 fetch (url)
 .then(respuesta => respuesta.json())
@@ -19,7 +19,7 @@ fetch (url)
     cargarProductos(stockProductos);
 })
 
-//Vuelco el stock en el HTML (div 'contenedor-productos')
+// Inyecto el stock en el HTML (div 'contenedor-productos')
 function cargarProductos(stockProductos){
 
     stockProductos.forEach((producto) => {
@@ -32,10 +32,9 @@ function cargarProductos(stockProductos){
         <p class="precioProducto">Precio: USD ${producto.precio}</p>
         <button id="agregar${producto.id}" class="btn p-color">Agregar</button> 
         `
-        //Cada boton que se crea de "Agregar" esta compuesto con el ID para hacerlo especifico a cada producto
         contenedorProductos.appendChild(div);
 
-        //listener evento click en los botones "Agregar" y recopilo su informacion
+        //listener evento click en los botones "Agregar". Recopilo su informacion
         const boton = document.getElementById(`agregar${producto.id}`)
         boton.addEventListener('click', () => {
             const productoID = producto.id;
@@ -44,7 +43,7 @@ function cargarProductos(stockProductos){
             const productoImg = producto.img;
             const productoCantidad = 1;
 
-            //Creo una Funcion con los parametros para agregar cada producto clickeado al chango
+            //Creo una Funcion con los parametros para agregar cada producto clickeado al carrito
             agregaProductoCarrito(productoID, productoNombre, productoPrecio, productoImg, productoCantidad);
             Toastify({
                 text: "Agregado correctamente",
@@ -102,11 +101,11 @@ function agregaProductoCarrito(productoID, productoNombre, productoPrecio, produ
     filaTabla.innerHTML = carritoContenido;
     tablaCarrito.append(filaTabla);
 
-    //Escucho el evento click en los botones "X" de eliminar item 
+    //Listener evento click en los botones "X" de eliminar item 
     filaTabla.querySelector('.borrarLinea')
     .addEventListener('click', borrarElemento); //Creo una funcion "borrarElemento" para sacar el producto del carro
 
-    //Escucho el evento de cambio en el input de cantidad de productos
+    //Listener evento de cambio en el input de cantidad de productos
     filaTabla.querySelector('.cantidadProducto')
     .addEventListener('change', cantidadCambiada); //Cada vez que cambien la cant de productos, voy a actualizar total $$ carrito
 
@@ -119,16 +118,16 @@ function actualizarTotalCarrito() {
     const totalCarrito = document.querySelector('.totalCarrito');
     const carritoFilas = document.querySelectorAll('.changuitoItem');
 
-  //Por Cada linea de mi changuito voy a estar leyendo el precio del producto y la cantidad total agregada
+  //Por Cada linea de mi carrito voy a estar leyendo el precio del producto y la cantidad total agregada
     carritoFilas.forEach((changuitoItem) => {
     const precioProducto = changuitoItem.querySelector('.precio');
     const cantidadProducto = changuitoItem.querySelector('.cantidadProducto');
-    const precioProductoItem = Number(precioProducto.textContent)  //converti texto a numero
-    const cantidadProductoItem = Number(cantidadProducto.value) //converti texto a numero
+    const precioProductoItem = Number(precioProducto.textContent)  
+    const cantidadProductoItem = Number(cantidadProducto.value) 
     total = total + precioProductoItem * cantidadProductoItem;
 });
 
-    totalCarrito.innerHTML = ("USD "+`${total.toFixed(2)}`);  //El "toFixed" es para redondear el importe en caso de tener decimales
+    totalCarrito.innerHTML = ("USD "+`${total.toFixed(2)}`);  // "toFixed" para redondear en caso de tener decimales
 }
 
 function borrarElemento(event) {
@@ -144,7 +143,7 @@ function borrarElemento(event) {
         
         if (result.isConfirmed) {
             botonAccion.closest('.changuitoItem').remove();
-            //una vez que elimino el producto del changuito actualizo el precio total
+            //una vez que elimino el producto del carrito actualizo el precio total
             actualizarTotalCarrito()
 
             // Muestro al usuario el mensaje de confirmacion 
@@ -163,7 +162,7 @@ function cantidadCambiada(event) {
     actualizarTotalCarrito();
 }
 
-//Escucho el click del boton "Comprar"
+//Listener evento click del boton "Comprar"
     botonComprar.addEventListener('click', () => {
     const totalCarrito = document.querySelector('.totalCarrito')
     const total = Number(totalCarrito.textContent.replace('USD', ''))
@@ -184,24 +183,24 @@ function cantidadCambiada(event) {
         })
     }
 
-    //Reseteo el localStorage; borro cualquier info que tenga
+    //Reseteo localStorage
     localStorage.clear();
 
-    //Voy a guardar en el localStorage el ultimo changuito comprado
+    //Voy a guardar en el localStorage el ultimo carrito
 
     const itemID = tablaCarrito.getElementsByClassName('itemID');
 
-    let changuito = []; //array vacio
+    let changuito = []; 
 
     for (let i = 0; i < itemID.length; i++) {
         let cantidadItems = itemID[i].parentElement.parentElement.parentElement.querySelector('.cantidadProducto').value;
         let productoPrecio = itemID[i].parentElement.parentElement.parentElement.querySelector('.precio').textContent;
         let productoNombre = itemID[i].parentElement.parentElement.parentElement.querySelector('.productoNombre').textContent;
-        //Trabajo el link de la imagen para obtenerlo con el formato que necesito "./images/..."
+        // Trabajo el link de la imagen para obtenerlo con el formato que necesito "./images/..."
         let productoIMG = itemID[i].parentElement.parentElement.parentElement.querySelector('.imagen').src;
         let productoID = itemID[i].parentElement.parentElement.parentElement.querySelector('.itemID').textContent;
         let guardarChanguito = new guardarCarrito(productoID, productoIMG, productoNombre, productoPrecio, cantidadItems)
-        changuito.push(guardarChanguito); // Lo pusheo a mi array que luego almacenare en Localstorage
+        changuito.push(guardarChanguito); // pusheo a mi array que luego almacenare en Localstorage
     }
 
     //Guardo info en localStorage
@@ -213,7 +212,7 @@ function cantidadCambiada(event) {
     
 });
 
-//Funcion objeto para guardar el changuito comprado
+//Funcion objeto para guardar el carrito comprado
 function guardarCarrito(id, img, nombre, precio, cantidad){
     this.id = id;
     this.img = img;
@@ -222,7 +221,7 @@ function guardarCarrito(id, img, nombre, precio, cantidad){
     this.cantidad = cantidad;
 }
 
-// Escucho el click del boton "Ver Ultima Compra"
+// Listener evento click del boton "Ver Ultima Compra"
 botonUltimaCompra.addEventListener('click', () => {
     tablaCarrito.innerHTML = ''; // Reseteo para que no muestre nada acumulado.
     actualizarTotalCarrito();
