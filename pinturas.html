@@ -4,20 +4,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="MERCADOS: Pinturas, Artes Gráficas, Construcción, Oil&Gas, etc...">
-    <meta name="keywords" content="pinturas, emulsión, tintas, construcción, aditivos, plásticos, madera, oil, gas, higiene, desinfección, adhesivos">
-    <link rel="apple-touch-icon" sizes="180x180" href="../assets/img/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../assets/img/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../assets/img/favicon-16x16.png">
+    <meta name="description" content="Pinturas: Emulsión,Dispersante,Antiespumante,Biocida, etc...">
+    <meta name="keywords" content="comprar, insumos, materia prima, emulsión, dispersante, antiespumante, biocida">
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/img/favicon-16x16.png">
+    <!--Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
-    <link rel="stylesheet" href="../sass/main.css">
-    <title>Norenplast - Pinturas</title>
+    <!--CSS-->
+    <link rel="stylesheet" href="./css/styless2.css">
+    <!-- Sweet Alert 2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.17/sweetalert2.min.css" integrity="sha512-CJ5goVzT/8VLx0FE2KJwDxA7C6gVMkIGKDx31a84D7P4V3lOVJlGUhC2mEqmMHOFotYv4O0nqAOD0sEzsaLMBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />    
+    <!-- Toastify -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"> 
+    <title>Norenplast - Insumos pinturas</title>
 </head>
+
 <body>
     <header>
         <nav class="navbar navbar-expand-lg pt-0 pb-2">
             <div class="container-fluid p-color">
-                <a class="navbar-brand" href="../index.html">
+                <a class="navbar-brand" href="index.html">
                     <img src="../assets/img/logo.jpg" alt="logo" style="width: 80px" class="p-1">
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,97 +34,100 @@
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="./empresa.html">EMPRESA</a>
+                    <a class="nav-link" aria-current="page" href="./pages/empresa.html">EMPRESA</a>
                     </li>
                     <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         MERCADOS
                     </a>
                     <ul class="dropdown-menu p-color">
-                        <li><a class="dropdown-item p-color" href="#">Adhesivos</a></li>
-                        <li><a class="dropdown-item p-color" href="#">Artes Gráficas</a></li>
-                        <li><a class="dropdown-item p-color" href="#">Construcción</a></li>
+                        <li><a class="dropdown-item p-color" href="../pages/mercados.html">Adhesivos</a></li>
+                        <li><a class="dropdown-item p-color" href="../pages/mercados.html">Artes Gráficas</a></li>
+                        <li><a class="dropdown-item p-color" href="../pages/mercados.html">Construcción</a></li>
                         <li><a class="dropdown-item p-color" href="#">Pinturas</a></li>
-                        <li><a class="dropdown-item p-color" href="#">Higiene y Desinfección</a></li>
-                        <li><a class="dropdown-item p-color" href="#">Maderas</a></li>
-                        <li><a class="dropdown-item p-color" href="#">Oil & Gas</a></li>
-                        <li><a class="dropdown-item p-color" href="#">Plásticos</a></li>
-                        <li><a class="dropdown-item p-color" href="#">Todos</a></li>
+                        <li><a class="dropdown-item p-color" href="../pages/mercados.html">Higiene y Desinfección</a></li>
+                        <li><a class="dropdown-item p-color" href="../pages/mercados.html">Maderas</a></li>
+                        <li><a class="dropdown-item p-color" href="../pages/mercados.html">Oil & Gas</a></li>
+                        <li><a class="dropdown-item p-color" href="../pages/mercados.html">Plásticos</a></li>
+                        <li><a class="dropdown-item p-color" href="../pages/mercados.html">Todos</a></li>
                     </ul>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="./novedades.html">NOVEDADES</a>
+                    <a class="nav-link" href="./pages/novedades.html">NOVEDADES</a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="./contacto.html">CONTACTO</a>
+                    <a class="nav-link" href="./pages/contacto.html">CONTACTO</a>
                     </li>
                 </ul>
                 </div>
             </div>
         </nav>
     </header>
+    
     <main>
         <div class="container-fluid">
             <div class="row">
                 <div class="parallax img-6 col-md-12">
-                    <h1 class="title-parallax">Pinturas</h1>
+                    <h1 class="title-parallax">Insumos para pinturas</h1>
                 </div>
-                <button onclick="calcularPrecio()" class="btn p-color mt-2">HAZ CLICK PARA COMPRAR</button>
-                <button onclick="buscarProducto()" class="btn p-color mt-2">BUSCAR PRODUCTO</button>
-                <script src="/js/script.js"></script>
             </div>
         </div>
-        <section class="container-fluid s-color">
-            <div class="row p-2 mt-2">
-                <div class="col-lg-3 col-md-6">
-                    <div class="card card-h m-2 s-color" style="width: 18rem;">
-                        <img src="../assets/img/carrito-de-compras.png" class="card-img-top" style="width: 70%; height: auto" alt="Pinturas">
-                        <div class="card-body">
-                        <h3 class="card-title">Emulsiones</h3>
-                        <p class="card-text">id:11 Tambor <br> id:12 Contenedor </p>
+        <section id="contenedor-productos"></section>
+        <section>
+            <div class="container">
+                <h2>Carrito</h2>
+                <hr>
+                <div class="row">
+                    <div class="col-2">
+                        <div>
+                            <h6 class="text-truncate">ID</h6>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div>
+                            <h6>Producto</h6>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div>
+                            <h6 class="text-truncate">Precio</h6>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div>
+                            <h6>Cantidad</h6>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="card card-h s-color m-2" style="width: 18rem;">
-                        <img src="../assets/img/carrito-de-compras.png" class="card-img-top" style="width: 70%; height: auto" alt="Pinturas">
-                        <div class="card-body">
-                        <h3 class="card-title">Dispersantes</h5>
-                        <p class="card-text">id:21 Bidón/Balde <br> id:22 Tambor <br> id:23 Contenedor</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="card card-h s-color m-2" style="width: 18rem;">
-                        <img src="../assets/img/carrito-de-compras.png" class="card-img-top" style="width: 70%; height: auto" alt="Pinturas">
-                        <div class="card-body">
-                        <h3 class="card-title">Antiespumantes</h3>
-                        <p class="card-text">id:31 Bidón/Balde <br> id:32 Tambor <br> id:33 Contenedor</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="card card-h s-color m-2" style="width: 18rem;">
-                        <img src="../assets/img/carrito-de-compras.png" class="card-img-top" style="width: 70%; height: auto" alt="Pinturas">
-                        <div class="card-body">
-                        <h3 class="card-title">Biocidas</h3>
-                        <p class="card-text">id:41 Bidón/Balde <br> id:42 Tambor <br> id:43 Contenedor</p>
-                        </div>
-                    </div>
-                </div>
+                <!--Aca voy a ir volcando el contenido de mi compra-->
+                <div class="shopping-cart-items tablaCarrito"></div>
             </div>
         </section>
+
+        <div id="subtotal-carrito">
+            <div id="float"><p>TOTAL:</p></div>
+            <div id="float"><p class="totalCarrito">USD 0</p></div>
+        </div>
+
+        <div>
+        <button id="comprar" class="btn p-color m-1">Realizar Compra</button>
+        </div>
+        <div>
+            <button id="botonUltimaCompra" class="btn p-color m-1">Última Compra</button>
+            <div id="ultimaCompra"></div>
+        </div>
     </main>
+
     <footer class="container-fluid">
         <div class="row p-color">
             <div class="col-md-4">
                 <h3 class="pt-2">Secciones</h3><hr>
                 <ul>
-                    <li><a href="../index.html">Inicio</a></li>
-                    <li><a href="./empresa.html">Empresa</a></li>
-                    <li><a href="#">Mercados</a></li>
-                    <li><a href="./novedades.html">Novedades</a></li>
-                    <li><a href="./contacto.html">Contacto</a></li>
+                    <li><a href="/index.html">Inicio</a></li>
+                    <li><a href="./pages/empresa.html">Empresa</a></li>
+                    <li><a href="./pages/mercados.html">Mercados</a></li>
+                    <li><a href="./pages/novedades.html">Novedades</a></li>
+                    <li><a href="./pages/contacto.html">Contacto</a></li>
                 </ul>
             </div>
             <div class="col-md-4">
@@ -157,6 +168,14 @@
             <h6 class="py-2 text-end"> Copyright © 2022 NORENPLAST S.A.</h6>
         </div>
     </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastify-js/1.6.1/toastify.js" integrity="sha512-MnKz2SbnWiXJ/e0lSfSzjaz9JjJXQNb2iykcZkEY2WOzgJIWVqJBFIIPidlCjak0iTH2bt2u1fHQ4pvKvBYy6Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Sweet alert 2 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.4.17/sweetalert2.min.js" integrity="sha512-Kyb4n9EVHqUml4QZsvtNk6NDNGO3+Ta1757DSJqpxe7uJlHX1dgpQ6Sk77OGoYA4zl7QXcOK1AlWf8P61lSLfQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- <script src="assets/js/db.js"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/luxon@3.0.1/build/global/luxon.min.js"></script>
+    <script src="./js/script.js"></script>
 </body>
 </html>

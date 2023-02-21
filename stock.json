@@ -1,0 +1,36 @@
+{
+    "stockProductos" : [
+        {
+            "id": 1,
+            "nombre": "Emulsión",
+            "descripcion": "Emulsión estireno acrílica",
+            "presentacion": "Contenedor x 1000 kg",
+            "precio": 2290,
+            "img": "./assets/img/ibc.jpg"
+        },
+        {
+            "id": 2,
+            "nombre": "Dispersante",
+            "descripcion": "Dispersante a base de Poliacrilato de Sodio",
+            "presentacion": "Tambor x 200 kg",
+            "precio": 984,
+            "img": "./assets/img/tambor.jpg"
+        },
+        {
+            "id": 3,
+            "nombre": "Antiespumante",
+            "descripcion": "Antiespumante no siliconado",
+            "presentacion": "Bidón x 20 kg",
+            "precio": 127,
+            "img": "./assets/img/bidon.jpg"
+        },
+        {
+            "id": 4,
+            "nombre": "Biocida",
+            "descripcion": "Biocida a base de CMIT/MIT (1,5%)",
+            "presentacion": "Bidón x 20 kg",
+            "precio": 59,
+            "img": "./assets/img/bidon.jpg"
+        }
+    ]
+}

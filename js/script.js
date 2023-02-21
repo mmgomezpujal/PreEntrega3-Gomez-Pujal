@@ -1,143 +1,238 @@
-// DEFINO EL ARRAY DE PRODUCTOS (OBJETOS)
+// SCRIPT ENTREGA FINAL 
 
-const productos = [
-    {nombre: "emulsion", id: "id11", presentacion: "contenedor", precio: 2.29 * 1000},
-    {nombre: "emulsion", id: "id12", presentacion: "tambor", precio: 2.29 * 1.20 * 200},
-    {nombre: "dispersante", id: "id21", presentacion: "contenedor", precio: 4.10 * 1000},
-    {nombre: "dispersante", id: "id22", presentacion: "tambor", precio: 4.10 * 1.20 * 200},
-    {nombre: "dispersante", id: "id23", presentacion: "balde/bidón", precio: 4.10 * 1.40 * 20},
-    {nombre: "antiespumante", id: "id31", presentacion: "contenedor", precio: 4.51 * 1000},
-    {nombre: "antiespumante", id: "id32", presentacion: "tambor", precio: 4.51 * 1.20 * 200},
-    {nombre: "antiespumante", id: "id33", presentacion: "balde/bidón", precio: 4.51 * 1.40 * 20},
-    {nombre: "biocida", id: "id41", presentacion: "contenedor", precio: 2.10 * 1000},
-    {nombre: "biocida", id: "id42", presentacion: "tambor", precio: 2.10 * 1.20 * 200},
-    {nombre: "biocida", id: "id43", presentacion: "balde/bidón", precio: 2.10 * 1.40 * 20}];
+const contenedorProductos = document.getElementById('contenedor-productos'); // contenedor donde cargaré el stock
+let botonComprar = document.getElementById("comprar"); // listener evento click en el boton "Realizar Compra"
+const tablaCarrito = document.querySelector('.tablaCarrito'); // div donde volcare los productos comprados 
+const clave_changuito = "claveChanguito"; // localStorage
 
-// DEFINO LA FUNCIÓN QUE BUSCARA EL PRODUCTO X ID
+// Contenedor datos ultima compra almacenados en localStorage
+const ultimaCompra = document.getElementById('ultimaCompra');
 
-    function buscarProducto() {
+const url = '\stock.json';
 
-    let buscar = prompt("Ingrese el id del producto que desea buscar: ");
-    
-    const busqueda = productos.find((producto) => producto.id == buscar);
-    
-    console.log(busqueda);
-    
+//Cargo el stock de mis productos desde el archivo .json
+
+fetch (url)
+.then(respuesta => respuesta.json())
+.then(resultado => {
+	stockProductos = resultado.stockProductos;
+    cargarProductos(stockProductos);
+})
+
+//Vuelco el stock en el HTML (div 'contenedor-productos')
+function cargarProductos(stockProductos){
+
+    stockProductos.forEach((producto) => {
+        const div = document.createElement("div");
+        div.innerHTML =`
+        <img src=${producto.img} alt="imagen-producto">
+        <h3>${producto.nombre}</h3>
+        <p> ${producto.descripcion}</p>
+        <p>${producto.presentacion}</p>
+        <p class="precioProducto">Precio: USD ${producto.precio}</p>
+        <button id="agregar${producto.id}" class="btn p-color">Agregar</button> 
+        `
+        //Cada boton que se crea de "Agregar" esta compuesto con el ID para hacerlo especifico a cada producto
+        contenedorProductos.appendChild(div);
+
+        //listener evento click en los botones "Agregar" y recopilo su informacion
+        const boton = document.getElementById(`agregar${producto.id}`)
+        boton.addEventListener('click', () => {
+            const productoID = producto.id;
+            const productoNombre = producto.nombre;
+            const productoPrecio = producto.precio;
+            const productoImg = producto.img;
+            const productoCantidad = 1;
+
+            //Creo una Funcion con los parametros para agregar cada producto clickeado al chango
+            agregaProductoCarrito(productoID, productoNombre, productoPrecio, productoImg, productoCantidad);
+            Toastify({
+                text: "Agregado correctamente",
+                duration: 3000,
+                gravity: 'bottom'
+            }).showToast();
+        })
+    })
 }
 
-// DEFINO LA FUNCIÓN QUE SERÁ LLAMADA DESDE HTML A TRAVÉS DEL SCRIPT
+function agregaProductoCarrito(productoID, productoNombre, productoPrecio, productoImg, productoCantidad){
 
-function calcularPrecio() {
-
-    let idIngresado = prompt("Ingrese el ID del producto (idxx) o ESC para salir: ");
-
-// BUCLE QUE ME PERMITE CONTINUAR MIENTRAS EL USUARIO NO SELECCIONE ESC
-
-    while (idIngresado != "ESC") {
-
-        let cantidad = prompt("Ingrese la cantidad deseada (en unidades): ");
-
-// RECORRO EL ARRAY CON UN FOR Y PARA CADA PRODUCTO PREGUNTO SI COINCIDE POR LA OPCIÓN INGRESADA POR EL USUARIO
-
-        for (const producto of productos) { 
-
-            if (idIngresado == producto.id) {
-                total = producto.precio * cantidad;
-                return alert("Seleccionaste la opción: " + producto.nombre + " " + producto.presentacion + ". El total de su compra es: USD " + total);
-            } else {
-                return alert("Por favor, ingresa un id correcto:");
-            }
+    //Evito que se dupliquen la lineas con el mismo producto; cada vez que se repita solo se incrementa la cantidad
+    const itemID = tablaCarrito.getElementsByClassName('itemID');      
+    for (let i = 0; i < itemID.length; i++){
+        if (itemID[i].innerText == productoID) {
+            let cantidadItems = itemID[i].parentElement.parentElement.parentElement.querySelector('.cantidadProducto');
+            cantidadItems.value++;
+            actualizarTotalCarrito();
+            return;
         }
     }
 
-// CONDICIONAL QUE ME PERMITE SALIR AL SELECCIONAR ESC
+    const filaTabla = document.createElement('div');
+    const carritoContenido = `
+    <div class="row changuitoItem">
+        <div class="col-2">
+            <div class="shopping-cart-price d-flex align-items-center h-100 border-bottom pb-2 pt-3">
+                <p class="item-price mb-0 itemID">${productoID}</p>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="shopping-cart-item d-flex align-items-center h-100 border-bottom pb-2 pt-3">
+                <img src=${productoImg} class="imgCarrito mb-0 imagen">
+                <h6 class="shopping-cart-item-title productoNombre text-truncate ml-3 mb-0">${productoNombre}</h6>
+            </div>
+        </div>
+        <div class="col-2">
+            <div class="shopping-cart-price d-flex align-items-center h-100 border-bottom pb-2 pt-3">
+                <p class="item-price mb-0 precio">${productoPrecio}</p>
+            </div>
+        </div>
+        <div class="col-2">
+            <div
+                class="shopping-cart-quantity d-flex justify-content-between align-items-center h-100 border-bottom pb-2 pt-3">
+                <input class="changuitoInput cantidadProducto" type="number"
+                value=${productoCantidad}>
+                <button class="btn btn-danger borrarLinea" type="button">X</button>
+            </div>
+        </div>
+    </div>
+    `;
 
-    if(idIngresado == "ESC") {
-        alert("¡Gracias por la visita!");
-    }
+    //Pusheo el contenido del item agregado al carrito al html
+    filaTabla.innerHTML = carritoContenido;
+    tablaCarrito.append(filaTabla);
+
+    //Escucho el evento click en los botones "X" de eliminar item 
+    filaTabla.querySelector('.borrarLinea')
+    .addEventListener('click', borrarElemento); //Creo una funcion "borrarElemento" para sacar el producto del carro
+
+    //Escucho el evento de cambio en el input de cantidad de productos
+    filaTabla.querySelector('.cantidadProducto')
+    .addEventListener('change', cantidadCambiada); //Cada vez que cambien la cant de productos, voy a actualizar total $$ carrito
+
+    //Actualizo el importe total del carrito cada vez que se hace click en "Agregar"
+    actualizarTotalCarrito()
+}    
+
+function actualizarTotalCarrito() {
+    let total = 0;
+    const totalCarrito = document.querySelector('.totalCarrito');
+    const carritoFilas = document.querySelectorAll('.changuitoItem');
+
+  //Por Cada linea de mi changuito voy a estar leyendo el precio del producto y la cantidad total agregada
+    carritoFilas.forEach((changuitoItem) => {
+    const precioProducto = changuitoItem.querySelector('.precio');
+    const cantidadProducto = changuitoItem.querySelector('.cantidadProducto');
+    const precioProductoItem = Number(precioProducto.textContent)  //converti texto a numero
+    const cantidadProductoItem = Number(cantidadProducto.value) //converti texto a numero
+    total = total + precioProductoItem * cantidadProductoItem;
+});
+
+    totalCarrito.innerHTML = ("USD "+`${total.toFixed(2)}`);  //El "toFixed" es para redondear el importe en caso de tener decimales
 }
 
+function borrarElemento(event) {
+    const botonAccion = event.target;
 
+    Swal.fire({
+        title: '"Desea eliminar el producto?"',
+        showCancelButton: true,
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Si',
+        cancelButtonText: 'Cancelar',
+    }).then((result) => {
+        
+        if (result.isConfirmed) {
+            botonAccion.closest('.changuitoItem').remove();
+            //una vez que elimino el producto del changuito actualizo el precio total
+            actualizarTotalCarrito()
 
+            // Muestro al usuario el mensaje de confirmacion 
+            Toastify({
+                text: "Eliminado correctamente",
+                duration: 2000,
+                gravity: 'bottom'
+            }).showToast();
+        }            
+    })         
+}
 
+function cantidadCambiada(event) {
+    const input = event.target;
+    input.value <= 0 ? (input.value = 1) : null;
+    actualizarTotalCarrito();
+}
 
-// -------------------------------------Primer PreEntrega---------------------------------------------------
+//Escucho el click del boton "Comprar"
+    botonComprar.addEventListener('click', () => {
+    const totalCarrito = document.querySelector('.totalCarrito')
+    const total = Number(totalCarrito.textContent.replace('USD', ''))
+    if (total === 0){
+        Swal.fire({
+            title: 'Error',
+            text: 'No hay productos seleccionados',
+            icon: 'error',
+            confirmButtonText: 'Cerrar'
+        })
+    }
+    else{
+        Swal.fire({
+            title: 'Su compra fue realizada con éxito',
+            text: 'TOTAL: USD '+total,
+            icon: 'success',
+            confirmButtonText: 'Cerrar'
+        })
+    }
 
-// DEFININO LAS VARIALES ASOCIADAS A LOS PRECIOS 
-// const precioId12 = 2.29 * 1000;
-// let precioId11 = (precioId12/1000) * 1.20 * 200;
+    //Reseteo el localStorage; borro cualquier info que tenga
+    localStorage.clear();
 
-// const precioId23 = 4.10 * 1000;
-// let precioId22 = (precioId23/1000) * 1.20 * 200;
-// let precioId21 = (precioId23/1000) * 1.40 * 20; 
+    //Voy a guardar en el localStorage el ultimo changuito comprado
 
-// const precioId33 = 4.51 * 1000;
-// let precioId32 = (precioId33/1000) * 1.20 * 200;
-// let precioId31 = (precioId33/1000) * 1.40 * 20; 
+    const itemID = tablaCarrito.getElementsByClassName('itemID');
 
-// const precioId43 = 2.10 * 1000;
-// let precioId42 = (precioId43/1000) * 1.20 * 200;
-// let precioId41 = (precioId43/1000) * 1.40 * 20;
+    let changuito = []; //array vacio
 
-// // DEFINO LA FUNCIÓN QUE SERÁ LLAMADA DESDE HTML A TRAVÉS DEL SCRIPT
-// function calcularPrecio() {
-//     let idIngresado = prompt("Ingrese el ID del producto (idxx) o ESC para salir: ");
-// // BUCLE QUE ME PERMITE CONTINUAR MIENTRAS EL USUARIO NO SELECCIONE ESC
-//     while (idIngresado!="ESC") {
-//         let cantidad = prompt("Ingrese la cantidad deseada (en unidades): ");
-// // CONDICIONAL PARA VALIDAR LOS ID INGRESADOS Y CALCULAR PRECIO
-//         switch(idIngresado) {
-//             case 'id11':
-//                 // total = precioId11 * cantidad;
-//                 alert('Seleccionaste la opción: emulsión en tambor x 200 kg. El total de su compra es: ' + 'USD ' + precioId11*cantidad);
-//                 return; 
-//                 case 'id12':
-//                 total = precioId12 * cantidad;
-//                 alert('Seleccionaste la opción: emulsión en contenedor x 1000 kg. El total de su compra es: ' + 'USD ' + total);
-//                 return;
-//             case 'id21':
-//                 total = precioId21 * cantidad;
-//                 alert('Seleccionaste la opción: dispersante en bidón/balde x 20 kg. El total de su compra es: ' + 'USD ' + total);
-//                 return;
-//             case 'id22':
-//                 total = precioId22 * cantidad;
-//                 alert('Seleccionaste la opción: dispersante en tambor x 200 kg. El total de su compra es: ' + 'USD ' + total);
-//                 return;
-//             case 'id23':
-//                 total = precioId23 * cantidad;
-//                 alert('Seleccionaste la opción: dispersante en contenedor x 1000 kg. El total de su compra es: ' + 'USD ' + total);
-//                 return;
-//             case 'id31':
-//                 total = precioId31 * cantidad;
-//                 alert('Seleccionaste la opción: antiespumante en bidón/balde x 20 kg. El total de su compra es: ' + 'USD ' + total);
-//                 return;
-//             case 'id32':
-//                 total = precioId32 * cantidad;
-//                 alert('Seleccionaste la opción: antiespumante en tambor x 200 kg. El total de su compra es: ' + 'USD ' + total);
-//                 return;
-//             case 'id33':
-//                 total = precioId33 * cantidad;
-//                 alert('Seleccionaste la opción: antiespumante en contenedor x 1000 kg. El total de su compra es: ' + 'USD ' + total);
-//                 return;
-//             case 'id41':
-//                 total = precioId41 * cantidad;
-//                 alert('Seleccionaste la opción: biocida en bidón/balde x 20 kg. El total de su compra es: ' + 'USD ' + total);
-//                 return;
-//             case 'id42':
-//                 total = precioId42 * cantidad;
-//                 alert('Seleccionaste la opción: biocida en tambor x 200 kg. El total de su compra es: ' + 'USD ' + total);
-//                 return;
-//             case 'id43':
-//                 total = precioId43 * cantidad;
-//                 alert('Seleccionaste la opción: biocida en contenedor x 1000 kg. El total de su compra es: ' + 'USD ' + total);
-//                 return;
-//             default:
-//                 idIngresado = prompt("Por favor, selecciona un id correcto:");
-//                 break;
-//         }
-//     }
-// // CONDICIONAL QUE ME PERMITE SALIR AL SELECCIONAR ESC
-//     if(idIngresado == "ESC") {
-//         alert("¡Gracias por la visita!");
-//     }
-// }
+    for (let i = 0; i < itemID.length; i++) {
+        let cantidadItems = itemID[i].parentElement.parentElement.parentElement.querySelector('.cantidadProducto').value;
+        let productoPrecio = itemID[i].parentElement.parentElement.parentElement.querySelector('.precio').textContent;
+        let productoNombre = itemID[i].parentElement.parentElement.parentElement.querySelector('.productoNombre').textContent;
+        //Trabajo el link de la imagen para obtenerlo con el formato que necesito "./images/..."
+        let productoIMG = itemID[i].parentElement.parentElement.parentElement.querySelector('.imagen').src;
+        let productoID = itemID[i].parentElement.parentElement.parentElement.querySelector('.itemID').textContent;
+        let guardarChanguito = new guardarCarrito(productoID, productoIMG, productoNombre, productoPrecio, cantidadItems)
+        changuito.push(guardarChanguito); // Lo pusheo a mi array que luego almacenare en Localstorage
+    }
+
+    //Guardo info en localStorage
+    localStorage.setItem(clave_changuito, JSON.stringify(changuito));
+
+    //Borro el Carrito de Compra y el div del detalle de "ultima Compra realizada" porque ahora hay una nueva compra.
+    tablaCarrito.innerHTML = '';
+    actualizarTotalCarrito();
+    
+});
+
+//Funcion objeto para guardar el changuito comprado
+function guardarCarrito(id, img, nombre, precio, cantidad){
+    this.id = id;
+    this.img = img;
+    this.nombre = nombre;
+    this.precio = precio;
+    this.cantidad = cantidad;
+}
+
+// Escucho el click del boton "Ver Ultima Compra"
+botonUltimaCompra.addEventListener('click', () => {
+    tablaCarrito.innerHTML = ''; // Reseteo para que no muestre nada acumulado.
+    actualizarTotalCarrito();
+
+    let almacenados = JSON.parse(localStorage.getItem(clave_changuito))
+    
+    if(almacenados){
+        for (let i = 0; i < almacenados.length; i++) {
+            agregaProductoCarrito(almacenados[i].id, almacenados[i].nombre, almacenados[i].precio, almacenados[i].img, almacenados[i].cantidad)
+        }
+        actualizarTotalCarrito();
+    }
+});

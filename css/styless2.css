@@ -1,0 +1,101 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.p-color {
+    background-color: #012169;
+    color: #f4f4f4;
+    border: #012169;
+}
+
+.nav-link {
+    color: white;
+    font-weight: bold;
+}
+
+.s-color {
+    background-color: #f4f4f4;
+    color: black;
+}
+
+footer ul li {
+    list-style-type: none;
+    text-align: left;
+}
+footer ul li a {
+    text-decoration: none;
+}
+
+div ul li {
+    list-style-type: none;
+}
+
+.parallax {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 480px;
+    position: relative;
+    opacity: 0.7;
+}
+
+.img-6 {
+    background-image: url(../assets/img/img-6.jpg);
+}
+
+.title-parallax {
+    color: white;
+    font-size: 3rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px black;
+    line-height: 480px;
+    padding: 0 0 0 10px;
+}
+
+img {
+    width: 50%;
+    margin-bottom: 10px;
+}
+
+.imgCarrito {
+    width: 10%;
+}
+
+h2, h3, p {
+    margin: 5px;
+}
+
+#contenedor-productos {
+    max-width: 100%;
+    margin: 60px;
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+.precioProducto {
+    font-weight: bold;
+}
+
+/* Estilos de la Tabla Carrito */
+
+#subtotal-carrito {
+    display: inline-flex;
+}
+
+#float {
+    float: left;
+    padding: 0.5rem;
+    margin: 2rem;
+}
+
+.changuitoInput {
+    max-width: 45px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #eee;
+    padding: 5px;
+}
